@@ -1,0 +1,41 @@
+N001: silider move to top
+N002: silider move to bottom
+N003: silider move up
+N004: silider move down
+
+N005: arrow down
+N006: arrow up
+N007: arrow left
+N008: arrow right
+N009: maintain, three gear
+N010: maintain, one gear
+N011: ZoomIn
+N012: ZoomOut
+
+N013: Refesh
+N014: save
+N015: cleanup
+N016: no, wrong
+N017: yes, right
+N018: zoom full
+N019: zoom 1:1
+N020: grab, camera
+N021: upload
+N022: download
+N023: home
+N024: new file, create file
+N025: create file
+N026: remove file
+N027: edit file
+N028: search
+N029: calculate
+N030: return
+N031: copy file
+N032: left
+N033: right
+N034: import file
+N035: export file
+N036: load MV config file
+N037: start, right
+N038: stop, rectangle
+N039: MV ini file

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LayoutRoot>
+  <RootPanel Orientation="Horizontal">
+    <LayoutAnchorablePaneGroup Orientation="Vertical" DockWidth="300">
+      <LayoutAnchorablePane DockWidth="300">
+        <LayoutAnchorable AutoHideMinWidth="100" AutoHideMinHeight="100" Title="ToolBox" IsSelected="True" ContentId="ToolBoxView" CanClose="False" />
+      </LayoutAnchorablePane>
+      <LayoutAnchorablePane>
+        <LayoutAnchorable AutoHideMinWidth="100" AutoHideMinHeight="100" Title="PropertyBrowserView" IsSelected="True" ContentId="PropertyBrowserView" CanClose="False" LastActivationTimeStamp="09/25/2018 10:24:30" />
+      </LayoutAnchorablePane>
+    </LayoutAnchorablePaneGroup>
+    <LayoutPanel Orientation="Vertical">
+      <LayoutPanel Orientation="Horizontal">
+        <LayoutDocumentPaneGroup Orientation="Horizontal">
+          <LayoutDocumentPane>
+            <LayoutDocument Title="Solution" IsSelected="True" IsLastFocusedDocument="True" ContentId="Solution" LastActivationTimeStamp="09/25/2018 10:24:38" />
+          </LayoutDocumentPane>
+        </LayoutDocumentPaneGroup>
+        <LayoutAnchorablePaneGroup Orientation="Horizontal" DockWidth="800" DockHeight="768">
+          <LayoutAnchorablePane DockHeight="768">
+            <LayoutAnchorable AutoHideMinWidth="100" AutoHideMinHeight="100" Title="ImageView" IsSelected="True" ContentId="ImageView" CanClose="False" LastActivationTimeStamp="09/25/2018 10:24:43" />
+          </LayoutAnchorablePane>
+        </LayoutAnchorablePaneGroup>
+      </LayoutPanel>
+      <LayoutAnchorablePaneGroup Orientation="Horizontal" DockHeight="150">
+        <LayoutAnchorablePane DockHeight="150">
+          <LayoutAnchorable AutoHideMinWidth="100" AutoHideMinHeight="100" Title="LogView" IsSelected="True" ContentId="LogView" CanClose="False" />
+        </LayoutAnchorablePane>
+      </LayoutAnchorablePaneGroup>
+    </LayoutPanel>
+  </RootPanel>
+  <TopSide />
+  <RightSide />
+  <LeftSide />
+  <BottomSide />
+  <FloatingWindows />
+  <Hidden />
+</LayoutRoot>

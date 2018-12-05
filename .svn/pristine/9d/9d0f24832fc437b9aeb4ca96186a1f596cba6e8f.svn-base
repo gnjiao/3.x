@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="Hdc.Mv.PropertyItem.Controls.RoiControlEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+>
+    <StackPanel Orientation="Vertical">
+        <Border Background="Lavender">
+            <RadioButton BorderThickness="1" BorderBrush="Blue" x:Name="RadioButtonRect1" GroupName="DrawObjectType" Checked="RadioButton_OnChecked">Rectangle1</RadioButton>
+        </Border>
+        <Border Background="AliceBlue">
+            <RadioButton BorderThickness="1" BorderBrush="Blue" x:Name="RadioButtonRect2" GroupName="DrawObjectType" Checked="RadioButton_OnChecked">Rectangle2</RadioButton>
+        </Border>
+        <Border Background="Lavender">
+            <RadioButton BorderThickness="1" BorderBrush="Blue" x:Name="RadioButtonCircle" GroupName="DrawObjectType" Checked="RadioButton_OnChecked">Circle</RadioButton>
+        </Border>
+        <Border Background="AliceBlue">
+            <RadioButton BorderThickness="1" BorderBrush="Blue" x:Name="RadioButtonEllipse" GroupName="DrawObjectType" Checked="RadioButton_OnChecked">Ellipse</RadioButton>
+        </Border>
+    </StackPanel>
+</UserControl>

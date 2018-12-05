@@ -1,0 +1,43 @@
+                   
+ChangeLog
+
+	************************************
+	*                                  *
+	*    Legend:                       *
+	*                                  *
+	*    * -> Security Fix             *
+	*    # -> Bug Fix                  *
+	*    + -> Addition                 *
+	*    ^ -> Changed                  *
+	*    - -> Removed                  *
+	*    ! -> Note                     *
+	*                                  *
+	************************************
+
+============================================================================
+VisionCreator 3.x
+============================================================================
+2018-10-26, op
+   + CreateShapeModelBlock
+   + TemplateMatchingBlock
+   
+============================================================================
+2018-10-17, op
+   ^ SpokeCircleFindingBlock
+   ^ RakeEdgeFindingBlock
+   + script
+============================================================================
+2018-10-09, op
+   + SpokeCircleFindingBlock
+   + RakeEdgeFindingBlock
+============================================================================
+2018-09-26, op
+   + VisionCreator sln/ci/svn/ftp update complete
+	sln:  Publish.sln(VisionCreator 3.x)
+	svn:  http://121.196.221.225/svn/Vins.ML/3.x/trunk
+	ci :  http://121.196.221.225:8091/
+	ftp:  ftp://121.196.221.225/Proj/VisionCreator/3.x
+============================================================================
+2017-11-15, op
+   + VisionCreator solution for new project
+============================================================================

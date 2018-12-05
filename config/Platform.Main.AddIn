@@ -1,0 +1,64 @@
+﻿<AddIn name        = "Platform.Main"
+       author      = "null"
+       url         = "http://127.0.0.1"
+       description = "Platform.Main CSharpCore v3.0.1"
+       addInManagerHidden = "true">
+
+  <Manifest>
+    <Identity name="Platform.Main" version = "@Platform.Main.exe"/>
+  </Manifest>
+
+  <Runtime>
+    <Import assembly = "Platform.Main.exe" />
+  </Runtime>
+
+  <Path name = "/Platform/FileFilter">
+    <FileFilter id = "Text"     name = "Text files" extensions = "*.txt"/>
+    <FileFilter id = "LogFiles" name = "Log files"  extensions = "*.log"/>
+    <FileFilter id = "PrjFiles" name = "Project files"  extensions = "*.Addin"/>
+  </Path>
+
+  <Path name = "/Platform/DisplayBindings">
+    <Class id = "Text" class = "Base.TextDisplayBinding"/>
+  </Path>
+
+  <Path name = "/Platform/MainMenu">
+
+    <MenuItem id = "File" type = "Menu" label = "${res:Base.Menu.File}" shortcut = "Control|F">
+      <MenuItem id = "Separator1" type = "Separator"/>
+      <MenuItem id = "Exit" label = "${res:Base.Menu.Close}" class = "Platform.Main.ExitCommand"/>     
+
+    </MenuItem>
+
+    <!--
+    <MenuItem id = "View" type = "Menu" label = "${res:Base.Menu.View}" shortcut = "Control|V">
+      <Include id = "ViewPath" name = "/Main/Views" path = "/Main/Views"/>
+      <Condition name="DeviceToolsCondition" action ="Exclude">
+        <MenuItem id = "LogViewShow" label = "${res:Base.LogViewTitle}" class = "Base.Presentation.LogViewShowCommand"/>
+      </Condition>
+    </MenuItem>
+
+    <MenuItem id = "Tools" type = "Menu" label = "${res:Base.Menu.Tools}" shortcut = "Control|T">
+      <Include id = "ToolPath" name = "/Main/Tools" path = "/Main/Tools"/>
+    </MenuItem>
+
+    <MenuItem id = "Help" type = "Menu" label = "${res:Base.Menu.Help}" shortcut = "Control|H">
+      <MenuItem id = "Info" label = "${res:Base.InfoFormTitle}" class  = "Base.Presentation.InfoWindowShow"/>
+    </MenuItem>
+    -->
+  </Path>
+
+  <Path name = "/Platform/Toolbar/Standard">
+    <ToolbarItem id = "Separator2" type = "Separator"/>
+    <ToolbarItem id = "Close" tooltip = "${res:Base.Menu.Close}" icon = "appbar.power" class = "Platform.Main.ExitCommand"/>
+    <ToolbarItem id = "Separator3" type = "Separator" />
+    <ToolbarItem id = "New" icon = "appbar.page" class ="Platform.Main.NewCommand"/>
+    <ToolbarItem id = "Open" icon = "appbar.folder.open" class ="Platform.Main.NewCommand"/>
+    <ToolbarItem id = "Save" icon = "appbar.disk.download" class ="Platform.Main.NewCommand"/>
+    <ToolbarItem id = "Separator4" type = "Separator"/>
+    <ToolbarItem id = "Run" icon = "appbar.control.play" class ="Platform.Main.RunCommand"/>
+    <ToolbarItem id = "Stop" icon = "appbar.control.stop" class ="Platform.Main.NewCommand"/>
+    
+  </Path>
+
+</AddIn>

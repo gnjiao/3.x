@@ -1,0 +1,140 @@
+*获取图像尺寸
+get_image_size(Image,Width,Height)
+*产生一个空显示对象，用于显示
+gen_empty_obj(Regions)
+*初始化边缘坐标数组
+ResultRow := []
+ResultColumn := []
+
+*产生xld
+gen_contour_polygon_xld(Contour, ROIRows, ROICols)
+*用回归线法（不抛出异常点，所有点权重一样）拟合圆
+fit_circle_contour_xld (Contour, 'algebraic', -1, 0, 0, 1, 2, RowC, ColumnC, Radius, StartPhi, EndPhi, PointOrder)
+*根据拟合结果产生xld，并保持到显示对象
+gen_circle_contour_xld (ContCircle, RowC, ColumnC, Radius, StartPhi, EndPhi, PointOrder, 3)
+concat_obj(Regions, ContCircle, Regions)
+
+*获取圆或圆弧xld上的点坐标
+get_contour_xld (ContCircle, RowXLD, ColXLD)
+
+*求圆或圆弧xld上的点的数量
+tuple_length(ColXLD, Length2)
+if(Elements < 3)
+    disp_message="" (WindowHandle="", '检测的边缘数量太少，请重新设置!', 'window', 52='', 12=''
+    return=''
+endif=''
+*如果xld是圆弧，有Length2个点，从起点开始，等间距（间距为Length2=''/(Elements-1)）取Elements个点，作为卡尺工具的中点
+*如果xld是圆，有Length2个点，以0°为起点，从起点开始，等间距（间距为Length2/(Elements)）取Elements个点，作为卡尺工具的中点
+for i := 0 to Elements-1 by 1
+
+if(RowXLD[0]=RowXLD[Length2-1])
+*xld的起点和终点坐标相对，为圆
+tuple_int(1.0*Length2/(Elements)*(i), j)
+ArcType:='circle'
+else
+*否则为圆弧
+tuple_int(1.0*Length2/(Elements-1)*(i), j)
+ArcType:='arc'
+endif
+*索引越界，强制赋值为最后一个索引
+if(j>=Length2)
+j:=Length2-1
+*         continue
+endif
+*获取卡尺工具中心
+RowE:=RowXLD[j]
+ColE:=ColXLD[j]
+
+*超出图像区域，不检测，否则容易报异常
+if (RowE>Height-1 or RowE < 0 or='' ColE=''>
+  Width-1 or ColE < 0
+        continue=''
+    endif=''
+    *边缘搜索方向类型：='''inner'搜索方向由圆外指向圆心；='''outer'搜索方向由圆心指向圆外=''
+    if(Direct='inner'
+        *求卡尺工具的边缘搜索方向=''
+        *求圆心指向边缘的矢量的角度=''
+        tuple_atan2(-RowE+RowC='', ColE-ColumnC='', ATan=''
+        *角度反向=''
+        ATan:='rad(180)+ATan'
+    else=''
+        *求卡尺工具的边缘搜索方向=''
+        *求圆心指向边缘的矢量的角度=''
+        tuple_atan2(-RowE+RowC='', ColE-ColumnC='', ATan=''
+    endif=''
+    
+    
+    *产生卡尺xld，并保持到显示对象=''
+    gen_rectangle2_contour_xld(Rectangle1='', RowE='',  ColE='', ATan='', DetectHeight=''/2, DetectWidth/2)
+  concat_obj(Regions, Rectangle1, Regions)
+  *用箭头xld指示边缘搜索方向，并保持到显示对象
+  if(i=0)
+  RowL2:=RowE+DetectHeight/2*sin(-ATan)
+  RowL1:=RowE-DetectHeight/2*sin(-ATan)
+  ColL2:=ColE+DetectHeight/2*cos(-ATan)
+  ColL1:=ColE-DetectHeight/2*cos(-ATan)
+  gen_arrow_contour_xld (Arrow1, RowL1, ColL1, RowL2, ColL2, 25, 25)
+  concat_obj (Regions, Arrow1, Regions)
+  endif
+
+
+  *产生测量对象句柄
+  gen_measure_rectangle2(RowE, ColE, ATan, DetectHeight/2,DetectWidth/2,Width, Height, 'nearest_neighbor', MsrHandle_Measure)
+
+  *设置极性
+  if (Transition = 'negative')
+  Transition := 'negative'
+  else
+  if (Transition = 'positive')
+
+  Transition := 'positive'
+  else
+  Transition := 'all'
+  endif
+  endif
+  *设置边缘位置。最强点是从所有边缘中选择幅度绝对值最大点，需要设置为'all'
+  if (Select = 'first')
+  Select := 'first'
+  else
+  if (Select = 'last')
+
+  Select := 'last'
+  else
+  Select := 'all'
+  endif
+  endif
+  *检测边缘
+  measure_pos (Image, MsrHandle_Measure, Sigma, Threshold, Transition, Select, RowEdge, ColEdge, Amplitude, Distance)
+  *清除测量对象句柄
+  close_measure(MsrHandle_Measure)
+  *临时变量初始化
+  *tRow，tCol保存找到指定边缘的坐标
+  tRow := 0
+  tCol := 0
+  *t保存边缘的幅度绝对值
+  t:= 0
+  tuple_length(RowEdge, Number)
+  *找到的边缘必须至少为1个
+  if(Number < 1)
+        continue=''
+    endif=''
+    *有多个边缘时，选择幅度绝对值最大的边缘=''
+    for='' k:='0' to='' Number-1='' by='' 1=''
+        if(abs(Amplitude=''[k=''])>
+    t)
+
+    tRow := RowEdge[k]
+    tCol := ColEdge[k]
+    t := abs(Amplitude[k])
+    endif
+    endfor
+    *把找到的边缘保存在输出数组
+    if(t>0)
+
+    ResultRow:=[ResultRow,tRow]
+    ResultColumn:=[ResultColumn,tCol]
+    endif
+    endfor
+
+
+    return ()

@@ -1,0 +1,13 @@
+Install-Package Rx-Main -Version 2.3.0-beta2
+
+Install-Package Rx-XAML -Version 2.3.0-beta2
+
+Install-Package HalconDotNet -Version 17.12.0
+
+Install-Package HDevEngineDotNet -Version 17.12.0
+
+Install-Package prism -version 5.0.0
+
+Install-Package CommonServiceLocator -Version 1.3.0 
+
+Install-Package Unity -Version 4.0.1 

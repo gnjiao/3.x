@@ -1,0 +1,597 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DF08645C-4F59-4FF1-B448-EA161E055504}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hdc.Mv.Halcon</RootNamespace>
+    <AssemblyName>Hdc.Mv.Halcon</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NO_EXPORT_MAIN</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NO_EXPORT_MAIN</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="halcondotnet, Version=18.5.0.0, Culture=neutral, PublicKeyToken=4973bed59ddbf2b8, processorArchitecture=MSIL">
+      <HintPath>..\..\sln\packages\HalconDotNet.18.5.0\lib\net35\halcondotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="hdevenginedotnet, Version=18.5.0.0, Culture=neutral, PublicKeyToken=4973bed59ddbf2b8, processorArchitecture=MSIL">
+      <HintPath>..\..\sln\packages\HDevEngineDotNet.18.5.0\lib\net35\hdevenginedotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Collections" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Interactive, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\sln\packages\Ix-Main.1.2.5\lib\net45\System.Interactive.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reactive.Core, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\sln\packages\Rx-Core.2.3.0-beta2\lib\net46\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\sln\packages\Rx-Interfaces.2.3.0-beta2\lib\net46\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\sln\packages\Rx-Linq.2.3.0-beta2\lib\net46\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\sln\packages\Rx-PlatformServices.2.3.0-beta2\lib\net46\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\sln\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActiveComputerDeviceInspectorInitializer.cs" />
+    <Compile Include="Block.Coordinate\CreateShapeModelBlock.cs" />
+    <Compile Include="Block.Coordinate\TemplateMatchingBlock.cs" />
+    <Compile Include="Block.Coordinate\CoordinationUsingRegion.cs" />
+    <Compile Include="Block.Coordinate\CoorinateResult.cs" />
+    <Compile Include="Block.Coordinate\OutputCorrectImage.cs" />
+    <Compile Include="Block.Coordinate\TemplateResult.cs" />
+    <Compile Include="Block.Coordinate\UpDataCoordinate.cs" />
+    <Compile Include="Blocks.Editor\PortReferencesItemsSource.cs" />
+    <Compile Include="Blocks.RegionOfInterest\RegionOfInterest.cs" />
+    <Compile Include="Blocks.RegionOfInterest\RegionOfInterestType.cs" />
+    <Compile Include="Blocks\BlockPropertyCategories.cs" />
+    <Compile Include="Blocks\LineToLineMeasureBlock.cs" />
+    <Compile Include="Blocks\RegionExtractorBlock.cs" />
+    <Compile Include="Blocks\RegionOfInterestBlock.cs" />
+    <Compile Include="BoundaryType.cs" />
+    <Compile Include="Calibration\Exports\Calibrate.cs" />
+    <Compile Include="Calibration\Exports\GetCalibratedImage.cs" />
+    <Compile Include="Calibration\Exports\GetCalibrationParameters.cs" />
+    <Compile Include="Calibration\HalconImageCalibrator.cs" />
+    <Compile Include="Calibration\HalconImageCalibrator2.cs" />
+    <Compile Include="Calibration\ImageToWorldPlaneUsingRobotHalconImageCalibrator.cs" />
+    <Compile Include="Calibration\SimHalconImageCalibrator.cs" />
+    <Compile Include="Calibration\SimpleHalconImageCalibrator.cs" />
+    <Compile Include="EdgesImageImageFilter.cs" />
+    <Compile Include="PaintRegionImageFilter.cs" />
+    <Compile Include="SobelDirFilterType.cs" />
+    <Compile Include="DefectDetection\BottomRegionExtractor.cs" />
+    <Compile Include="DefectDetection\DefectRegionExtractor.cs" />
+    <Compile Include="DefectDetection\ExtractedCharacter.cs" />
+    <Compile Include="DefectDetection\SVM_Classifier.cs" />
+    <Compile Include="DefectDetection\TopRegionExtractor.cs" />
+    <Compile Include="DefectDetection\TrainSvmSample.cs" />
+    <Compile Include="Exports\pts_to_best_circle_using_ellipse.cs" />
+    <Compile Include="Exports\pts_to_best_circle.cs" />
+    <Compile Include="Exports\pts_to_best_line.cs" />
+    <Compile Include="Exports\rake.cs" />
+    <Compile Include="Exports\spoke.cs" />
+    <Compile Include="FitLineContourXldAlgorithm.cs" />
+    <Compile Include="Blocks\BlockAttribute.cs" />
+    <Compile Include="Blocks\CacheAttribute.cs" />
+    <Compile Include="Blocks\Block.cs" />
+    <Compile Include="Blocks\BlockCatagory.cs" />
+    <Compile Include="Blocks\BlockEngine.cs" />
+    <Compile Include="Blocks\BlockException.cs" />
+    <Compile Include="Blocks\BlockSchema.cs" />
+    <Compile Include="Blocks\BlockStatus.cs" />
+    <Compile Include="Blocks\IBlock.cs" />
+    <Compile Include="Blocks\ImageFilterBlock.cs" />
+    <Compile Include="Blocks\InputPortAttribute.cs" />
+    <Compile Include="Blocks\OutputPortAttribute.cs" />
+    <Compile Include="Blocks\PortReference.cs" />
+    <Compile Include="Blocks.Geometry\RakeEdgeFindingBlock.cs" />
+    <Compile Include="Blocks\ReadImageBlock.cs" />
+    <Compile Include="Blocks\RegionProcessorBlock.cs" />
+    <Compile Include="Blocks.Geometry\SpokeCircleFindingBlock.cs" />
+    <Compile Include="HalconDefectInfo.cs" />
+    <Compile Include="HdcMvEx.cs" />
+    <Compile Include="Exports\CropImage.cs" />
+    <Compile Include="Exports\PaintGrayOffset.cs" />
+    <Compile Include="HWindowExtensions.cs" />
+    <Compile Include="HXLDExtensions.cs" />
+    <Compile Include="HXLDContExtensions.cs" />
+    <Compile Include="ImageAcquisition\E2VChangeScanDirectionInitializer.cs" />
+    <Compile Include="ImageAcquisition\E2VChangeScanDirectionPlugin.cs" />
+    <Compile Include="ImageAcquisition\IHalconCamera.cs" />
+    <Compile Include="ImageType.cs" />
+    <Compile Include="Inspection.Coordination\GetCenterOfRegionCoordinateExtactor.cs" />
+    <Compile Include="Inspection.Coordination\GetSmallestHRectangle2OfRegionCoordinateExtactor.cs" />
+    <Compile Include="Inspection.Coordination\GetTwoPointsWithCircleCoordinateExtactor.cs" />
+    <Compile Include="Inspection.Coordination\GetTwoPointsWithLinesCoordinateExtactor.cs" />
+    <Compile Include="Inspection.Coordination\GetTwoPointsWithRegionsCoordinateExtactor.cs" />
+    <Compile Include="Inspection.Coordination\IntersectionCoordinateExtactor.cs" />
+    <Compile Include="Inspection.Coordination\BaselineCoordinateExtactor.cs" />
+    <Compile Include="Inspection.Coordination\ICoordinateExtactor.cs" />
+    <Compile Include="Inspection.DatumPlanes\DatumPlaneResult.cs" />
+    <Compile Include="Inspection.DatumPlanes\FitSurfaceFirstOrderDatumPlaneCreator.cs" />
+    <Compile Include="Inspection.ImageFilters\AdjustMeanImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\AnisotropicDiffusionImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\AnisotropicDiffusionMode.cs" />
+    <Compile Include="Inspection.ImageFilters\BinomialImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\ConvertImageTypeImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Custom\ChangeDomainUsingRegionProcessorFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Custom\IntensityAndScale2ImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Custom\IntensityAndScaleImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\EdgesImageImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\EmphasizeImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\GrayDilationShapeImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\HighpassImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\ChangeDomainFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\CompositeFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\DomainToBinFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\ExpandDomainGrayFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\GrayClosingRectFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\GrayClosingShapeFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\GrayDilationRectFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\GrayDilationShapeFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\GrayErosionRectFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\GrayErosionShapeFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\GrayOpeningRectFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\GrayOpeningShapeFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\GrayRangeRectFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\HighpassImageImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\MeanImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\MeanSpFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\MedianImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\LaplaceOfGaussFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\MedianRectFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\PaintRegionImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Custom\PaintRegionUsingHysteresisThresholdImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\DomainToBinImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\EquHistoImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\ReduceDomainofImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\RegionToBinImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\RotateImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\ScaleImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\SobelDirImageFilter.cs" />
+    <Compile Include="Inspection.Inspectors\DataCodeSearchingInspector.cs" />
+    <Compile Include="Inspection.Inspectors\DistanceBetweenPointsOfXldAndRadialLineInspector.cs" />
+    <Compile Include="Inspection.DatumPlanes\IDatumPlaneCreator.cs" />
+    <Compile Include="Inspection.Inspectors\IntersectionPointOfTwoShapesInspector.cs" />
+    <Compile Include="Inspection.Inspectors\IRegionSearchingInspector.cs" />
+    <Compile Include="Inspection.Inspectors\IXldInspector.cs" />
+    <Compile Include="Inspection.Inspectors\PointOfEdgeAndRadialLineInspector.cs" />
+    <Compile Include="Inspection.Inspectors\PointOfXldAndRadialLineInspector.cs" />
+    <Compile Include="Inspection.Inspectors\RegionSearchingInspector.cs" />
+    <Compile Include="Inspection.Inspectors\XldInspector.cs" />
+    <Compile Include="Inspection.Inspectors\IDataCodeSearchingInspector.cs" />
+    <Compile Include="Inspection.RegionExtractors\Custom\GetDomainAndProcessRegionExtractor.cs" />
+    <Compile Include="Inspection.ImageFilters\ImageFilterBase.cs" />
+    <Compile Include="Inspection.ImageFilters\InvertImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Custom\MeanAndSubImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Custom\ProjectAndCropOfLineScanImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\ReduceDomainFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\SubImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\SubImage2Filter.cs" />
+    <Compile Include="Inspection.RegionExtractors\ConcatenateMultiplyRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Custom\SelectDarkAndLightLineUsingDynThresholdRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Custom\SelectDarkAndLightSpotUsingDynThresholdWithSelectByAreaRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\FindHoleHalfCircleRegion.cs" />
+    <Compile Include="Inspection.RegionExtractors\FindHoleHalfCircleRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\GenRegionContourXldRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\HysteresisThresholdInvertRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\HysteresisThresholdRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\ReferenceRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\RegionExtractorBase.cs" />
+    <Compile Include="Inspection.RegionExtractors\RotateImageRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Custom\GetDomainRect1AndMarginRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Custom\SelectDarkAndLightRegionUsingDynThresholdRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\ZoomImageRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionProcessors\AggregateSelectShapeRegionProcessor.cs" />
+    <Compile Include="AggregateType.cs" />
+    <Compile Include="Inspection.RegionProcessors\Custom\ConvertToAverageWidthRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\Custom\ExpandToImageEdgeRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\Custom\GetBorderBetweenErosionCirclesRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\Custom\IntersectionOfDilationCircleAndShapeTransRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\Custom\MoveAndDifferenceRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\Custom\MoveAndDifferenceReverseRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\Custom\MoveAndIntersectionRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\Custom\MoveAndSymmDifferenceRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\Custom\MoveAndSymmDifferenceReverseRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\Custom\MoveAndUnionRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\Custom\SelectHalfRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\Custom\SelectHorizontalLinePairBoundaryRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\Custom\SelectRectangle1FromCenterRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\Custom\SelectUnionWhenInterseted2RegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\Custom\SelectUnionWhenInterseted2UsingDilationRectangle1RegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\FindLinesInStrideRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\Custom\GenRectangle1RegionFromExistSmallestRectangle1RegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\GenCircleFromAreaCenterRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\GetHoughCircleRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\HoughCirclesRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\SelectRegionByCountRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionExtractors\ThresholdByGrayMeanRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\UnionMultiplyRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionProcessors\SimpleSelectShapeRegionProcessor.cs" />
+    <Compile Include="Inspection.ShapeExtractors\IAngleExtractor.cs" />
+    <Compile Include="Inspection.ShapeExtractors\IDataCodeExtractor.cs" />
+    <Compile Include="Inspection.ShapeExtractors\ILineInCoordinateExtractor.cs" />
+    <Compile Include="Inspection.ShapeExtractors\InnerCircleOfRegionCircleExtractor.cs" />
+    <Compile Include="Inspection.ShapeExtractors\IPointExtractor.cs" />
+    <Compile Include="Inspection.ShapeExtractors\IPointInCoordinateExtractor.cs" />
+    <Compile Include="Inspection.ShapeExtractors\LineAngleExtractor.cs" />
+    <Compile Include="Inspection.ShapeExtractors\SingleSvmOcrDataCodeExtractor.cs" />
+    <Compile Include="Inspection.ShapeExtractors\QRDataCodeExtractor.cs" />
+    <Compile Include="Inspection.ShapeExtractors\Rect2PhiAngleExtractor.cs" />
+    <Compile Include="Inspection.RegionProcessors\Custom\SelectUnionWhenInterseted2UsingDilationCircleRegionProcessor.cs" />
+    <Compile Include="Inspection.ShapeExtractors\CircleExtractorPointInCoordinateExtractor.cs" />
+    <Compile Include="Inspection.ShapeExtractors\LineInCoordinateExtractor.cs" />
+    <Compile Include="Inspection.ShapeExtractors\RegionCenterPointInCoordinateExtractor.cs" />
+    <Compile Include="Inspection.XldExtractors\GenContourRegionXldXldExtractor.cs" />
+    <Compile Include="Inspection.XldExtractors\SelectBestXldExtractor.cs" />
+    <Compile Include="Inspection.XldExtractors\EdgesSubPixXldExtractor.cs" />
+    <Compile Include="Inspection.XldExtractors\GenContoursSkeletonXldExtractor.cs" />
+    <Compile Include="Inspection.XldExtractors\IXldExtractor.cs" />
+    <Compile Include="Inspection.XldExtractors\LinesGaussXldExtractor.cs" />
+    <Compile Include="Inspection.XldExtractors\StructuredXldExtractor.cs" />
+    <Compile Include="Inspection.XldExtractors\XldExtractorBase.cs" />
+    <Compile Include="Inspection.XldProcessors\AggregateSelectShapeXldProcessor.cs" />
+    <Compile Include="Inspection.XldProcessors\CompositeXldProcessor.cs" />
+    <Compile Include="Inspection.XldProcessors\FitEllipseContourXldProcessor.cs" />
+    <Compile Include="Inspection.XldProcessors\IXldProcessor.cs" />
+    <Compile Include="Inspection.XldProcessors\SegmentContoursXldProcessor.cs" />
+    <Compile Include="Inspection.XldProcessors\SelectShapeXldEntry.cs" />
+    <Compile Include="Inspection.XldProcessors\SelectShapeXldForHXLDContProcessor.cs" />
+    <Compile Include="Inspection.XldProcessors\SelectShapeXldProcessor.cs" />
+    <Compile Include="Inspection.XldProcessors\SmoothContoursXldProcessor.cs" />
+    <Compile Include="Inspection.XldProcessors\UnionAdjacentContoursXldProcessor.cs" />
+    <Compile Include="Inspection.XldProcessors\UnionCocircularContoursXldProcessor.cs" />
+    <Compile Include="Inspection.XldProcessors\UnionCotangentialContoursXldProcessor.cs" />
+    <Compile Include="Inspection\DistanceBetweenTwoPointsDefinition.cs" />
+    <Compile Include="Inspection\DistanceBetweenTwoPointsInspector.cs" />
+    <Compile Include="Inspection\DistanceBetweenTwoPointsResult.cs" />
+    <Compile Include="Inspection\IntersectionPointOfTwoShapesResult.cs" />
+    <Compile Include="Inspection\IStepFromGrayValueInspector.cs" />
+    <Compile Include="Inspection\PointDefinition.cs" />
+    <Compile Include="Inspection\PointOfEdgeAndRadialLineDefinition.cs" />
+    <Compile Include="Inspection\PointOfEdgeAndRadialLineResult.cs" />
+    <Compile Include="Inspection\ShapeType.cs" />
+    <Compile Include="Inspection\DataCodeSearchingDefinition.cs" />
+    <Compile Include="Inspection\DataCodeSearchingResult.cs" />
+    <Compile Include="Inspection\DefectResultExtensions.cs" />
+    <Compile Include="Inspection\DefinitionBase.cs" />
+    <Compile Include="Inspection\DistanceBetweenPointsOfXldAndRadialLineDefinition.cs" />
+    <Compile Include="Inspection\DistanceBetweenPointsOfXldAndRadialLineResult.cs" />
+    <Compile Include="Inspection\IntersectionPointOfTwoShapesDefinition.cs" />
+    <Compile Include="Inspection\LineDefinition.cs" />
+    <Compile Include="Inspection\PointOfXldAndRadialLineDefinition.cs" />
+    <Compile Include="Inspection\PointOfXldAndRadialLineResult.cs" />
+    <Compile Include="Inspection\RadialLineDefinition.cs" />
+    <Compile Include="Inspection\RegionSearchingDefinition.cs" />
+    <Compile Include="Inspection\RegionSearchingResult.cs" />
+    <Compile Include="Inspection\StepFromGrayValueDefinition.cs" />
+    <Compile Include="Inspection\StepFromGrayValueInspector.cs" />
+    <Compile Include="Inspection\StepFromGrayValueResult.cs" />
+    <Compile Include="Inspection\XldSearchingResult.cs" />
+    <Compile Include="Inspection\IHomMat2DExtractor.cs" />
+    <Compile Include="Inspection\InspectionResultExtensions.cs" />
+    <Compile Include="Inspection\PointSearchingDefinition.cs" />
+    <Compile Include="Inspection\ProjectionRectangle4HomMat2DExtractor.cs" />
+    <Compile Include="Inspection\XldSearchingDefinition.cs" />
+    <Compile Include="RobotVision\AffineTransPoint2dEx.cs" />
+    <Compile Include="RobotVision\HHomConverter.cs" />
+    <Compile Include="RegionFillMode.cs" />
+    <Compile Include="Schema\HalconFrameInspectionInfo.cs" />
+    <Compile Include="HalconExtensions.cs" />
+    <Compile Include="Schema\HalconFrameInspectionController.cs" />
+    <Compile Include="HalconInspectorException.cs" />
+    <Compile Include="HalconMvController.cs" />
+    <Compile Include="HDevelopExport.Partials.cs" />
+    <Compile Include="HImageExtensions.cs" />
+    <Compile Include="HRectangle1.cs" />
+    <Compile Include="HRectangle2.cs" />
+    <Compile Include="HRegionExtensions.cs" />
+    <Compile Include="Calibration\HalconImageCalibratorExtensions.cs" />
+    <Compile Include="Schema\HalconImageFileSavedResult.cs" />
+    <Compile Include="Schema\HalconInspectorExtensions.cs" />
+    <Compile Include="Schema\IHalconFrameGrabberPlugin.cs" />
+    <Compile Include="Schema\IHalconFrameInspectionController.cs" />
+    <Compile Include="Inspection.Coordination\CoordinateCircleCalculator.cs" />
+    <Compile Include="Inspection.Coordination\RelativeCoordinateFactory.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\BinomialFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\ChangeDomainImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\CompositeImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Custom\DynThresholdToBinFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\EmphasizeFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Custom\EnhanceEdgeArea4Filter.cs" />
+    <Compile Include="Inspection.ImageFilters\Custom\EnhanceEdgeAreaByBinaryThresholdWithMeanFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Custom\EnhanceEdgeAreaByScaleDualFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Custom\EnhanceEdgeAreaByScaleFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Custom\EnhanceEdgeAreaH1403Filter.cs" />
+    <Compile Include="Inspection.ImageFilters\Custom\EnhanceRegion4FilterParams.cs" />
+    <Compile Include="Inspection.ImageFilters\Ex.cs" />
+    <Compile Include="Inspection.ImageFilters\ExpandDomainGrayImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Exports\EnhanceEdgeArea.cs" />
+    <Compile Include="Inspection.ImageFilters\Exports\EnhanceEdgeArea2.cs" />
+    <Compile Include="Inspection.ImageFilters\Exports\EnhanceEdgeArea3.cs" />
+    <Compile Include="Inspection.ImageFilters\Exports\EnhanceEdgeArea4.cs" />
+    <Compile Include="Inspection.ImageFilters\Exports\EnhanceEdgeAreaByBinaryThresholdWithMean.cs" />
+    <Compile Include="Inspection.ImageFilters\Exports\EnhanceEdgeAreaByScale.cs" />
+    <Compile Include="Inspection.ImageFilters\Exports\EnhanceEdgeAreaByScaleDual.cs" />
+    <Compile Include="Inspection.ImageFilters\Exports\EnhanceEdgeAreaH1403.cs" />
+    <Compile Include="Inspection.ImageFilters\Exports\GrayOpeningAndDilationFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Custom\FlatFieldCorrectionFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\GrayClosingRectImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\GrayClosingShapeImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\GrayDilationRectImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\GrayErosionRectImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\GrayErosionShapeImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Custom\GrayOpeningAndDilationFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\GrayOpeningRectImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\GrayOpeningShapeImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\GrayRangeRectImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Custom\HoleToMeanFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\IImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\LaplaceOfGaussImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\MeanFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\MeanSpImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\Obsoletes\MedianFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\MedianRectImageFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\MinMaxGrayScaleFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\RegionToBinFilter.cs" />
+    <Compile Include="Inspection.ImageFilters\SobelAmpImageFilter.cs" />
+    <Compile Include="Inspection.Inspectors\CircleInspector.cs" />
+    <Compile Include="Inspection.Inspectors\DefectInspector.cs" />
+    <Compile Include="Inspection.Inspectors\EdgeInspector.cs" />
+    <Compile Include="Inspection.Inspectors\ICircleInspector.cs" />
+    <Compile Include="Inspection.Inspectors\IDefectInspector.cs" />
+    <Compile Include="Inspection.Inspectors\IEdgeInspector.cs" />
+    <Compile Include="Inspection.Inspectors\InspectionController.cs" />
+    <Compile Include="Inspection.Inspectors\InspectorEx.cs" />
+    <Compile Include="Inspection.Inspectors\InspectorFactory.cs" />
+    <Compile Include="Inspection.Inspectors\IPartInspector.cs" />
+    <Compile Include="Inspection.Inspectors\IRegionTargetInspector.cs" />
+    <Compile Include="Inspection.Inspectors\ISurfaceInspector.cs" />
+    <Compile Include="Inspection.Inspectors\PartInspector.cs" />
+    <Compile Include="Inspection.Inspectors\RegionTargetInspector.cs" />
+    <Compile Include="Inspection.Inspectors\SimCircleInspector.cs" />
+    <Compile Include="Inspection.Inspectors\SimEdgeInspector.cs" />
+    <Compile Include="Inspection.Inspectors\SurfaceInspector.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\AntennaAroundOfS1423ARegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\AntennaAroundOfS1423CRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\AntennaOfS1423RegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\BinaryThresholdRect2RegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\BinaryThresholdRectangle2RegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\BinaryThresholdRectRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\DynThresholdDefectExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\DynThresholdWithMeanDefectExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\DynThresholdWithMeanExcludedDefectExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\FindS1404SurfaceA.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\GetBlobsByDynThreshold.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\GetBlobsByDynThresholdWithMean.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\GetBlobsByDynThresholdWithMeanExcluded.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\GetRegionByBinaryThreshold.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\GetRegionByBinaryThresholdRect.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\GetRegionByBinaryThresholdRect2.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\GetRegionByBinaryThresholdWithMean.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\GetRegionByGray.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\GetRegionByGrayAndArea.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\GetRegionByGrayInvert.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\GetRegionByGrowing.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\GetRegionBySobelAmp.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\GetRegionBySobelAmp2.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\GetRegionOfAntennaAroundOfS1423A.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\GetRegionOfAntennaAroundOfS1423C.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\GetRegionOfAntennaOfS1423.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\GetRegionOfLightOrDark.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\GetRegionOfLightOrDarkRect2.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\GetRegionOfRoiByBinaryThreshold.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\GetRegionOfRoughWithSobelMean.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\HDevelopExportExtensions.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\Exports\ReduceDomainForRectangle.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\GrayAndAreaRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\GrayInvertRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\GrayRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\GrowingRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\LightOrDarkRect2RegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\LightOrDarkRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\RoiByBinaryThresholdRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\RoughWithSobelMeanRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\SobelAmp2RegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\SobelAmpRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\_\DefectExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\_\FullRectangle2RegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\_\IDefectExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Exports\_\IRectangle2RegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\AutoThresholdRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\BinaryThresholdDualRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\BinaryThresholdRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\CircleRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\CropDomainRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\DifferenceRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\DynThresholdCroppedRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\DynThresholdRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\GetDomainRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\IntersectionRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\IRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\PolarTransRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\ProcessDomainRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\ProcessedRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Rectangle2RegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\RegiongrowingRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\StructuredRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\SymmDifferenceRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\ThresholdRegionExtractor.cs" />
+    <Compile Include="Inspection.RegionExtractors\Union2RegionExtractor.cs" />
+    <Compile Include="Inspection.RegionProcessors\BoundaryRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\ClosingCircleRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\ClosingRectangle1RegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\ComplementRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\CompositeRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\ConnectionRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\Custom\ExtendLinesRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\DilationCircleRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\DilationRectangle1RegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\ErosionCircleRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\ErosionRectangle1RegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\FillUpRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\FillUpShapeRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\Intersection2RegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\IntersectionMultiRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\IntersectionRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\IRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\PartitionDynamicRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\RankRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\SelectObjRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\ShapeTransRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\SortRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\UnionMultiplyRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\MoveRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\OpeningCircleRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\OpeningRectangle1RegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\SelectShapeEntry.cs" />
+    <Compile Include="Inspection.RegionProcessors\SelectShapeRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\SelectShapeSeriesRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\SkeletonRegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\SmallestRectangle1RegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\SmallestRectangle2RegionProcessor.cs" />
+    <Compile Include="Inspection.RegionProcessors\Union1RegionProcessor.cs" />
+    <Compile Include="Inspection.ShapeExtractors\DistanceOfLineToLineFunc.cs" />
+    <Compile Include="Inspection.ShapeExtractors\Exports\FindCircleCenterUseHough.cs" />
+    <Compile Include="Inspection.ShapeExtractors\FindCircleCenterUseHough.cs" />
+    <Compile Include="Inspection.ShapeExtractors\HoughCircleExtractor.cs" />
+    <Compile Include="Inspection.ShapeExtractors\ICircleExtractor.cs" />
+    <Compile Include="Inspection.ShapeExtractors\ILineExtractor.cs" />
+    <Compile Include="Inspection.ShapeExtractors\RakeLineExtractor.cs" />
+    <Compile Include="Inspection.ShapeExtractors\SpokeCircleExtractor.cs" />
+    <Compile Include="Schema\HalconInspectionSchemaInspector.cs" />
+    <Compile Include="Inspection\CircleSearchingDefinition.cs" />
+    <Compile Include="Inspection\CircleSearchingDefinitionCollection.cs" />
+    <Compile Include="Inspection\CircleSearchingResult.cs" />
+    <Compile Include="Inspection\CircleSearchingResultCollection.cs" />
+    <Compile Include="Inspection\ClosedRegionDefinition.cs" />
+    <Compile Include="Inspection\ClosedRegionDefinitionCollection.cs" />
+    <Compile Include="Inspection\ClosedRegionResult.cs" />
+    <Compile Include="Inspection\ClosedRegionResultCollection.cs" />
+    <Compile Include="Inspection\DefectDefinition.cs" />
+    <Compile Include="Inspection\DefectDefinitionCollection.cs" />
+    <Compile Include="Inspection\DefectResult.cs" />
+    <Compile Include="Inspection\DefectResultCollection.cs" />
+    <Compile Include="Inspection\DistanceBetweenLinesDefinition.cs" />
+    <Compile Include="Inspection\DistanceBetweenLinesResult.cs" />
+    <Compile Include="Inspection\DistanceBetweenLinesResultCollection.cs" />
+    <Compile Include="Inspection\DistanceBetweenPointsResult.cs" />
+    <Compile Include="Inspection\DistanceBetweenPointsResultCollection.cs" />
+    <Compile Include="Inspection\EdgeSearchingDefinition.cs" />
+    <Compile Include="Inspection\EdgeSearchingDefinitionCollection.cs" />
+    <Compile Include="Inspection\EdgeSearchingResult.cs" />
+    <Compile Include="Inspection\EdgeSearchingResultCollection.cs" />
+    <Compile Include="Inspection\Ex.cs" />
+    <Compile Include="Inspection\InspectionReport.cs" />
+    <Compile Include="Inspection\InspectionResult.cs" />
+    <Compile Include="Inspection\InspectionResultCollection.cs" />
+    <Compile Include="Inspection\InspectionSchema.cs" />
+    <Compile Include="Inspection\InspectionSchemaExtensions.cs" />
+    <Compile Include="Inspection\InspectionSchemaFactory.cs" />
+    <Compile Include="Inspection\PartSearchingDefinition.cs" />
+    <Compile Include="Inspection\PartSearchingDefinitionCollection.cs" />
+    <Compile Include="Inspection\PartSearchingResult.cs" />
+    <Compile Include="Inspection\RegionDefectResult.cs" />
+    <Compile Include="Inspection\RegionExtractorCollection.cs" />
+    <Compile Include="Inspection\RegionResult.cs" />
+    <Compile Include="Inspection\RegionTargetDefinition.cs" />
+    <Compile Include="Inspection\RegionTargetResult.cs" />
+    <Compile Include="Inspection\SurfaceDefinition.cs" />
+    <Compile Include="Inspection\SurfaceDefinitionCollection.cs" />
+    <Compile Include="Inspection\SurfacePartDefinition.cs" />
+    <Compile Include="Inspection\SurfacePartReference.cs" />
+    <Compile Include="Inspection\SurfaceResult.cs" />
+    <Compile Include="Inspection\SurfaceResultCollection.cs" />
+    <Compile Include="Interpolation.cs" />
+    <Compile Include="MaskShape.cs" />
+    <Compile Include="MedianMargin.cs" />
+    <Compile Include="MedianMaskType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RowOrCol.cs" />
+    <Compile Include="Schema\HalconFrameGrabberSchema.cs" />
+    <Compile Include="Schema\HalconMvSchema.cs" />
+    <Compile Include="Calibration\IHalconImageCalibrator.cs" />
+    <Compile Include="Schema\IHalconInspector.cs" />
+    <Compile Include="Schema\ISaveImageFileHalconFrameGrabberPlugin.cs" />
+    <Compile Include="Schema\SaveImageFileHalconFrameGrabberPlugin.cs" />
+    <Compile Include="Schema\SimDefectHalconInspector.cs" />
+    <Compile Include="Schema\SimDefectLiteHalconInspector.cs" />
+    <Compile Include="Schema\SimHalconInspector.cs" />
+    <Compile Include="ShapeTransType.cs" />
+    <Compile Include="SobelAmpFilterType.cs" />
+    <Compile Include="SortMode.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Inspection.RegionProcessors\Exports\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <Content Include="Exports\spoke.txt" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Toolkit\Core.Toolkit.csproj">
+      <Project>{2aeabe20-5e8f-4310-a228-66bd3d434683}</Project>
+      <Name>Core.Toolkit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hdc.Mv.Halcon.Controls\Hdc.Mv.Halcon.Controls.csproj">
+      <Project>{4799d047-2620-46ae-824f-a6cd80803f25}</Project>
+      <Name>Hdc.Mv.Halcon.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hdc.Mv.PropertyItem.Controls\Hdc.Mv.PropertyItem.Controls.csproj">
+      <Project>{7fd6b545-35f8-4c38-b986-6361dbebc30d}</Project>
+      <Name>Hdc.Mv.PropertyItem.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hdc.Mv\Hdc.Mv.csproj">
+      <Project>{1345186b-af53-4db9-a1d9-64ec7f14ee2f}</Project>
+      <Name>Hdc.Mv</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

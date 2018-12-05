@@ -1,0 +1,51 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reactive;
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
+using System.Threading.Tasks;
+using Core.Mvvm;
+using Core.Mvvm.Dialogs;
+
+namespace Hdc.Mvvm.Dialogs
+{
+    public class BindableConstantDialogViewModel :ViewModel, IModalDialogViewModel
+    {
+        private bool _isShow;
+
+        public bool IsShow
+        {
+            get { return _isShow; }
+            set
+            {
+                if (Equals(_isShow, value)) return;
+                _isShow = value;
+                RaisePropertyChanged(() => IsShow);
+
+                if (!_isShow)
+                {
+                    _subject.OnNext(new Unit());
+                }
+            }
+        }
+
+        public void Close()
+        {
+            IsShow = false;
+        }
+
+        Subject<Unit> _subject =new Subject<Unit>();
+
+        public IObservable<Unit> Show()
+        {
+            new Task(() =>
+                         {
+                             IsShow = true;
+                         })
+                         .Start();
+            
+            return _subject.Take(1);
+        }
+    }
+}

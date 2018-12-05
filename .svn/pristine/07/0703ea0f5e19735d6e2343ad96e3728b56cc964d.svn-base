@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hdevelop file_version="1.0" halcon_version="10.0" cs="-348094294">
+<procedure name="draw_spoke">
+<interface>
+<io>
+<par name="Image"/>
+</io>
+<oo>
+<par name="Regions"/>
+</oo>
+<ic>
+<par name="WindowHandle"/>
+<par name="Elements"/>
+<par name="DetectHeight"/>
+<par name="DetectWidth"/>
+</ic>
+<oc>
+<par name="ROIRows"/>
+<par name="ROICols"/>
+<par name="Direct"/>
+</oc>
+</interface>
+<body>
+<l>disp_message (WindowHandle, '1、画4个以上点确定一个圆弧,点击右键确认', 'window', 1, 12, 'red', 'false')</l>
+<l>gen_empty_obj(Regions)</l>
+<l>draw_nurbs (ContOut1, WindowHandle, 'true', 'true', 'true', 'true', 3, Rows, Cols, Weights)</l>
+<l>tuple_length (Weights, Length1)</l>
+<l>if(Length1&lt;4)</l>
+<l> disp_message (WindowHandle, '提示：点数太少，请重画', 'window', 32, 12, 'red', 'false')</l>
+<l>   ROIRows:=[]</l>
+<l>   ROICols:=[]</l>
+<l>   return()</l>
+<l>endif   </l>
+<c></c>
+<c> </c>
+<l>ROIRows:=Rows</l>
+<l>ROICols:=Cols</l>
+<c> *生成一个XLD轮廓多边形</c>
+<l>gen_contour_polygon_xld(Contour, Rows, Cols)</l>
+<c>* 拟合一个椭圆亚像素的轮廓</c>
+<l>*gen_ellipse_contour_xld (ContEllipse, 200, 200, 0, 100, 50, 0, 6.28318/2, 'negative', 1.5)</l>
+<c>* 拟合一个圆形亚像素的轮廓</c>
+<l>fit_circle_contour_xld (Contour, 'algebraic', -1, 0, 0, 3, 2, RowC, ColumnC, Radius, StartPhi, EndPhi, PointOrder)</l>
+<l>gen_circle_contour_xld (ContCircle, RowC, ColumnC, Radius, StartPhi, EndPhi, PointOrder, 3)</l>
+<l>concat_obj(Regions, ContCircle, Regions)</l>
+<l>get_contour_xld (ContCircle, RowXLD, ColXLD)</l>
+<c></c>
+<l>dev_display(Image)</l>
+<l>dev_display(ContCircle)</l>
+<l>gen_cross_contour_xld(Cross, RowC, ColumnC, 60, 0.785398)</l>
+<l>dev_display(Cross)</l>
+<l>disp_message (WindowHandle, '2、以远离圆心方向且垂直于边缘，画箭头确定边缘检测方向，点击右键确认', 'window', 12, 12, 'red', 'false') </l>
+<l>* dev_set_color('red')</l>
+<c>* 画远离圆心的直线</c>
+<l>draw_line(WindowHandle, Row1, Column1, Row2, Column2) </l>
+<c>*计算两点到圆心的距离</c>
+<l>distance_pp(RowC, ColumnC, Row1, Column1, DistanceStart)</l>
+<l>distance_pp(RowC, ColumnC, Row2, Column2, DistanceEnd)</l>
+<c>*计算圆形的轮廓的长度</c>
+<l>length_xld(ContCircle, Length)</l>
+<l>tuple_length(ColXLD, Length2)</l>
+<l>if(Elements&lt;1)</l>
+<l>    ROIRows:=[]</l>
+<l>   ROICols:=[]</l>
+<l>   return()</l>
+<l>endif  </l>
+<l>for i := 0 to Elements-1 by 1</l>
+<c>    *头元组和尾元组相同则说明轮廓是一个圆</c>
+<l>    if(RowXLD[0]=RowXLD[Length2-1])</l>
+<c>        *tuple_int将元组的转化成整数型元组，此句就是选取RowXLD元组的第j个元素做准备</c>
+<l>       tuple_int(1.0*Length2/(Elements-1)*(i), j)</l>
+<l>    else</l>
+<l>          tuple_int(1.0*Length2/(Elements-1)*(i), j)</l>
+<c>          </c>
+<l>    endif</l>
+<l>     if(j&gt;=Length2)</l>
+<l>            j:=Length2-1</l>
+<l>*             continue</l>
+<l>     endif</l>
+<c>    </c>
+<l>    RowE:=RowXLD[j]</l>
+<l>    ColE:=ColXLD[j]</l>
+<c>    * 比较距离来计算角度</c>
+<l>    if(DistanceStart&gt;DistanceEnd)</l>
+<c>        *以开始点Row1为原点，来计算线的角度</c>
+<l>         tuple_atan2(-RowE+RowC, ColE-ColumnC, ATan)</l>
+<l>         ATan:=rad(180)+ATan</l>
+<l>         Direct:='inner'</l>
+<l>    else</l>
+<c>        *以结束点Row2为原点，来计算线的角度</c>
+<l>    tuple_atan2(-RowE+RowC, ColE-ColumnC, ATan)</l>
+<l>        Direct:='outer'</l>
+<l>    endif</l>
+<c>   </c>
+<c>   </c>
+<l>    gen_rectangle2(Rectangle1, RowE,  ColE, ATan, DetectHeight/2, DetectWidth/2)</l>
+<l>    concat_obj(Regions, Rectangle1, Regions)</l>
+<l>    if(i=0)</l>
+<l>        RowL2:=RowE+DetectHeight/2*sin(-ATan)</l>
+<l>        RowL1:=RowE-DetectHeight/2*sin(-ATan)</l>
+<l>        ColL2:=ColE+DetectHeight/2*cos(-ATan)</l>
+<l>        ColL1:=ColE-DetectHeight/2*cos(-ATan)</l>
+<l>        gen_arrow_contour_xld (Arrow1, RowL1, ColL1, RowL2, ColL2, 25, 25)</l>
+<l>        concat_obj (Regions, Arrow1, Regions)</l>
+<l>      endif</l>
+<l>endfor</l>
+<c>  </c>
+<l>return ()</l>
+</body>
+<docu id="draw_spoke">
+<parameters>
+<parameter id="DetectHeight">
+<default_value>60</default_value>
+<description lang="zh_CN">检测边缘点的卡尺工具的高度</description>
+<sem_type>integer</sem_type>
+<values>
+<item>30</item>
+<item>60</item>
+<item>90</item>
+<item>120</item>
+</values>
+</parameter>
+<parameter id="DetectWidth">
+<default_value>15</default_value>
+<description lang="zh_CN">检测边缘点的卡尺工具的宽度</description>
+<sem_type>integer</sem_type>
+<values>
+<item>5</item>
+<item>10</item>
+<item>15</item>
+<item>20</item>
+<item>25</item>
+<item>30</item>
+<item>40</item>
+</values>
+</parameter>
+<parameter id="Direct">
+<description lang="zh_CN">'inner'表示检测方向由边缘点指向圆心；
+'outer'表示检测方向由圆心指向边缘点</description>
+<sem_type>string</sem_type>
+<type_list>
+<item>string</item>
+</type_list>
+</parameter>
+<parameter id="Elements">
+<default_value>30</default_value>
+<description lang="zh_CN">检测边缘点数</description>
+<sem_type>integer</sem_type>
+<type_list>
+<item>real</item>
+</type_list>
+<values>
+<item>10</item>
+<item>20</item>
+<item>30</item>
+<item>50</item>
+<item>60</item>
+</values>
+</parameter>
+<parameter id="Image">
+<description lang="zh_CN">输入图像</description>
+<sem_type>image</sem_type>
+<type_list>
+<item>byte</item>
+<item>int1</item>
+<item>int2</item>
+<item>uint2</item>
+<item>int4</item>
+<item>int8</item>
+<item>real</item>
+<item>cyclic</item>
+<item>direction</item>
+<item>complex</item>
+<item>vector_field</item>
+</type_list>
+</parameter>
+<parameter id="ROICols">
+<description lang="zh_CN">spoke工具ROI的x数组</description>
+<sem_type>integer</sem_type>
+<type_list>
+<item>integer</item>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="ROIRows">
+<description lang="zh_CN">spoke工具ROI的y数组</description>
+<sem_type>real</sem_type>
+<type_list>
+<item>integer</item>
+<item>real</item>
+</type_list>
+</parameter>
+<parameter id="Regions">
+<description lang="zh_CN">输出边缘点检测区域及检测方向</description>
+<sem_type>object</sem_type>
+</parameter>
+<parameter id="WindowHandle">
+<description lang="zh_CN">图像串口句柄</description>
+<mixed_type>false</mixed_type>
+<sem_type>window</sem_type>
+<type_list>
+<item>integer</item>
+</type_list>
+</parameter>
+</parameters>
+</docu>
+</procedure>
+</hdevelop>

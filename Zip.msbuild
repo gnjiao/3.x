@@ -1,0 +1,135 @@
+<Project DefaultTargets="ZipAll" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--<Import Project="Variable.msbuild"/>-->  
+  <Import Project="Env.msbuild"/>
+  <PropertyGroup>
+    <PublishDirectory>_publish</PublishDirectory>
+    <!--<GetNowDateTime>$([System.DateTime]::Now.ToString("yyyymmddThhmmss"))</GetNowDateTime> 
+    <NowDateTime>$(GetNowDateTime)</NowDateTime>-->  
+    <SrcExcludeFiles>$(PublishDirectory)\**\*</SrcExcludeFiles>
+    <SrcExcludeFiles>**\bin\**\*</SrcExcludeFiles>
+    <SrcExcludeFiles>**\obj\**\*</SrcExcludeFiles>
+    <SrcExcludeFiles>**\.git\**\*</SrcExcludeFiles>
+    <SrcExcludeFiles>**\.svn\**\*</SrcExcludeFiles>
+    <ProductVersion>$(BuildNumber)</ProductVersion>
+  </PropertyGroup>
+  
+  <UsingTask TaskName="MSBuild.Community.Tasks.Zip" AssemblyFile="sln\.build\MSBuild.Community.Tasks.dll" />
+  <ItemGroup>
+    <!--    <BinDebugFiles Include="$(BinDebugDirectory)\**\*.*" />-->
+    <!--    <BinReleaseFiles Include="$(BinReleaseDirectory)\**\*.*"-->
+    <!--		            Exclude="$(BinReleaseDirectory)\**\*.pdb"/>-->
+    <BinFiles Condition="$(Configuration)==Debug"
+              Include="bin\$(Configuration)\**\*" />
+    <BinFiles Condition="$(Configuration)==Release"
+              Include="bin\$(Configuration)\**\*;"
+              Exclude="
+              bin\$(Configuration)\**\*.pdb;
+              bin\$(Configuration)\*.xml;
+              bin\$(Configuration)\*.config;
+              
+              bin\$(Configuration)\de\*;
+              bin\$(Configuration)\en\*;
+              bin\$(Configuration)\es\*;
+              bin\$(Configuration)\fr\*;
+              bin\$(Configuration)\it\*;
+              bin\$(Configuration)\ja\*;
+              bin\$(Configuration)\ko\*;
+              bin\$(Configuration)\ru\*;
+              bin\$(Configuration)\zh-Hans\*;
+              bin\$(Configuration)\zh-Hant\*;
+              
+              bin\$(Configuration)\Hdc.Mv.Inspection.Halcon.BatchInspector.exe;
+              bin\$(Configuration)\Hdc.Mv.RobotVision.HandEyeCalibrator.exe;
+              bin\$(Configuration)\Hdc.Mv.RobotVision.LocatingService.exe;
+              bin\$(Configuration)\MeasureSchemaTool.exe;
+              bin\$(Configuration)\ReportsMergeTool.exe;
+              bin\$(Configuration)\Vins.ML.Infrastructure.Tests.exe;
+              bin\$(Configuration)\Vins.ML.MeasureStationMonitor.exe;
+              bin\$(Configuration)\Vins.ML.MeasureStationTest.exe;
+              bin\$(Configuration)\Vins.ML.MinitabSupport.exe;
+              "/>
+    <BinFiles Condition="$(Configuration)==Release"
+              Include="
+              bin\$(Configuration)\log4net.config;
+              
+              bin\$(Configuration)\Hdc.Mv.Inspection.Halcon.SampleApp.exe.config;
+              bin\$(Configuration)\MqTestClient.exe.config;
+              bin\$(Configuration)\Vins.ML.ImageMeasuringTool.exe.config;
+              bin\$(Configuration)\Vins.ML.MeasureLineDataService.exe.config;
+              bin\$(Configuration)\Vins.ML.MeasureLineManager.exe.config;
+              bin\$(Configuration)\Vins.ML.MeasureStationLanucher.exe.config;
+              bin\$(Configuration)\Vins.ML.MeasureStationLanucher32.exe.config;
+              bin\$(Configuration)\Vins.ML.MeasureStationService.exe.config;
+              bin\$(Configuration)\Vins.ML.MeasureStationService32.exe.config;
+              bin\$(Configuration)\Vins.ML.OpcService.exe.config;
+              "/>
+    <SrcFiles Include="**\*"
+              Exclude="$(PublishDirectory)\**\*;**\bin\**\*;**\obj\**\*;**\.git\**\*;**\.svn\**\*;**\.gitattributes;**\.gitsvnextmodules;"/>
+    <!--<SrcFiles Include="**\*.*"
+              Exclude="@(SrcExcludeFiles)"/>-->
+    <!--<SrcFiles Include="**\*.*"/>
+    <SrcFiles Exclude="$(PublishDirectory)\**\*.*"/>
+    <SrcFiles Exclude="**\bin\**\*.*"/>
+    <SrcFiles Exclude="**\obj\**\*.*"/>
+    <SrcFiles Exclude="**\.git\**\*.*"/>
+    <SrcFiles Exclude="**\.svn\**\*.*"/>-->
+  </ItemGroup>
+  <Target Name="ZipBin_Inner">
+     <Message Text="ZipBin_Inner"></Message>
+     <Message Text="NowDateTime=$(NowDateTime)"></Message>
+     <Message Text="Configuration=$(Configuration)"></Message>
+     <MSBuild.Community.Tasks.Zip ZipFileName="$(PublishDirectory)\$(VendorNameShort)_$(ProductNameShort)_$(ProductVersion)_bin_$(Configuration).zip" Files="@(BinFiles)" WorkingDirectory="bin\$(Configuration)\"/> 
+  </Target>
+  <Target Name="ZipSrc_Inner">
+     <MSBuild.Community.Tasks.Zip ZipFileName="$(PublishDirectory)\$(VendorNameShort)_$(ProductNameShort)_$(ProductVersion)_src.zip" Files="@(SrcFiles)" /> 
+  </Target>
+  <Target Name="ZipBin">
+	<!--<MSBuild Targets="ZipBin" Projects="Zip.bin.msbuild"/>-->
+    <Message Text="NowDateTime=$(NowDateTime)"></Message>
+    <Message Text="Configuration=$(Configuration)"></Message>
+	<CallTarget Targets="ZipBin_Inner"></CallTarget>
+  </Target>
+  <Target Name="ZipBinDebug">
+    <!--<PropertyGroup>
+        <Configuration>Debug</Configuration>
+    </PropertyGroup>-->
+    <!--<CreateProperty Value="Debug">
+      <Output TaskParameter="Value" PropertyName="Configuration" />
+    </CreateProperty>-->
+    <Message Text="ZipBinDebug"></Message>
+    <Message Text="NowDateTime=$(NowDateTime)"></Message>
+    <Message Text="Configuration=$(Configuration)"></Message>
+	<!--<CallTarget Targets="ZipBin_Inner"></CallTarget>-->
+	<MSBuild Targets="ZipBin_Inner" Properties="NowDateTime=$(NowDateTime);Configuration=Debug;" Projects="Zip.msbuild"/>
+  </Target>
+  <Target Name="ZipBinRelease">
+    <!--<PropertyGroup>
+        <Configuration>Release</Configuration>
+    </PropertyGroup>-->
+    <!--<CreateProperty Value="Release">
+      <Output TaskParameter="Value" PropertyName="Configuration" />
+    </CreateProperty>-->
+    <Message Text="ZipBinRelease"></Message>
+    <Message Text="NowDateTime=$(NowDateTime)"></Message>
+    <Message Text="Configuration=$(Configuration)"></Message>
+	<!--<CallTarget Targets="ZipBin_Inner"></CallTarget>-->
+	<MSBuild Targets="ZipBin_Inner" Properties="NowDateTime=$(NowDateTime);Configuration=Release;" Projects="Zip.msbuild"/>
+  </Target>
+  <Target Name="ZipSrc">
+	<!--<MSBuild Targets="ZipSrc" Projects="Zip.src.msbuild"/>-->
+	<CallTarget Targets="ZipSrc_Inner"></CallTarget>
+  </Target>
+  <Target Name="ZipAll">
+    <Message Text="ZipAll"></Message>
+    <Message Text="NowDateTime=$(NowDateTime)"></Message>
+    <Message Text="Configuration=$(Configuration)"></Message>
+	<MSBuild Targets="ZipBin_Inner" Properties="NowDateTime=$(NowDateTime);Configuration=Debug;" Projects="Zip.msbuild"/>
+	<MSBuild Targets="ZipBin_Inner" Properties="NowDateTime=$(NowDateTime);Configuration=Release;" Projects="Zip.msbuild"/>
+	<MSBuild Targets="ZipSrc" Properties="NowDateTime=$(NowDateTime);" Projects="Zip.msbuild"/>
+    <!--<CallTarget Targets="ZipBinRelease"></CallTarget>
+    <Message Text="ZipBinDebug"></Message>
+    <CallTarget Targets="ZipBinDebug"></CallTarget>
+    <Message Text="ZipSrc"></Message>
+    <CallTarget Targets="ZipSrc"></CallTarget>-->
+  </Target>
+</Project>
